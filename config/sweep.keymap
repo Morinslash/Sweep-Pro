@@ -5,14 +5,6 @@
 // Layout: BASE / NAV / MOUSE / MEDIA / NUM / SYM / FUN
 // Mouse layer: original repo implementation preserved verbatim
 // Encoders:    per-layer sensor-bindings; MOUSE layer unchanged
-//
-// Key position map (0-based flat index):
-//  0   1   2   3   4       5   6   7   8   9
-// 10  11  12  13  14      15  16  17  18  19
-// 20  21  22  23  24      25  26  27  28  29
-//         30  31  32      33  34  35
-// 30=L-ENC(none) 31=L-inner(NAV) 32=L-outer(SYM)
-// 33=R-outer(NUM) 34=R-inner(MOUSE) 35=R-ENC(none)
 
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 2500
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 20
@@ -26,7 +18,6 @@
 #include "behaviors/character_map.dtsi"
 #include "behaviors/report.dtsi"
 
-// Layer indices
 #define BASE  0
 #define NAV   1
 #define MOUSE 2
@@ -35,7 +26,6 @@
 #define SYM   5
 #define FUN   6
 
-// Pointing speed constants (preserved from original)
 #define SPEED_POINTER    0
 #define SPEED_SCROLL     1
 #define SPEED_PREV       0
@@ -118,7 +108,6 @@
 			#binding-cells = <1>;
 		};
 
-		// Hold: drag-scroll  |  Tap: Z
 		ds_z: drag_scroll_z {
 			compatible = "zmk,behavior-hold-tap";
 			#binding-cells = <2>;
@@ -129,10 +118,8 @@
 			bindings = <&drgscrl>, <&kp>;
 		};
 
-		// Hold: mouse button  |  Tap: X
 		sel_x: select_x {
 			compatible = "zmk,behavior-hold-tap";
-			#binding-cells = <2>;
 			#binding-cells = <2>;
 			flavor = "tap-preferred";
 			tapping-term-ms = <200>;
@@ -141,7 +128,6 @@
 			bindings = <&mkp>, <&kp>;
 		};
 
-		// Home row mod (balanced)
 		ht: hold_tap {
 			label = "hold_tap";
 			compatible = "zmk,behavior-hold-tap";
@@ -166,7 +152,6 @@
 		};
 	};
 
-	// FUN activates when both NAV and NUM are held simultaneously
 	conditional_layers {
 		compatible = "zmk,conditional-layers";
 		fun_layer {
@@ -178,7 +163,6 @@
 	combos {
 		compatible = "zmk,combos";
 
-		// -- Mouse finger combos (preserved from original, active on BASE + MOUSE) --
 		combo_er_right_click {
 			timeout-ms = <25>;
 			require-prior-idle-ms = <125>;
@@ -215,7 +199,6 @@
 			bindings = <&mkp MCLK>;
 		};
 
-		// -- Thumb combo: left-inner(31) + left-outer(32) -> MEDIA (momentary) --
 		combo_thumb_media {
 			timeout-ms = <50>;
 			require-prior-idle-ms = <125>;
@@ -228,9 +211,6 @@
 	keymap {
 		compatible = "zmk,keymap";
 
-		// -- Layer 0: BASE --
-		// Windows HRM: LALT/LCTRL/LGUI on left, RGUI/RCTRL/RALT on right
-		// Z: hold=drag-scroll  X: hold=LCLK (both tap-preferred, 200ms)
 		base_layer {
 			display-name = "DEF";
 			bindings = <
@@ -242,7 +222,6 @@
 			sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP &inc_dec_kp C_BRI_DEC C_BRI_UP>;
 		};
 
-		// -- Layer 1: NAV --
 		nav_layer {
 			display-name = "NAV";
 			bindings = <
@@ -254,7 +233,6 @@
 			sensor-bindings = <&inc_dec_kp LC(LEFT) LC(RIGHT) &inc_dec_kp PG_DN PG_UP>;
 		};
 
-		// -- Layer 2: MOUSE -- ORIGINAL PRESERVED VERBATIM --
 		mouse {
 			display-name = "MOUSE";
 			bindings = <
@@ -266,7 +244,6 @@
 			sensor-bindings = <&enc_ptr_spd &enc_scrl_spd>;
 		};
 
-		// -- Layer 3: MEDIA --
 		media_layer {
 			display-name = "MED";
 			bindings = <
@@ -278,7 +255,6 @@
 			sensor-bindings = <&inc_dec_kp C_PREV C_NEXT &inc_dec_kp C_VOL_DN C_VOL_UP>;
 		};
 
-		// -- Layer 4: NUM --
 		num_layer {
 			display-name = "NUM";
 			bindings = <
@@ -290,7 +266,6 @@
 			sensor-bindings = <&inc_dec_kp LEFT RIGHT &inc_dec_kp PG_DN PG_UP>;
 		};
 
-		// -- Layer 5: SYM --
 		sym_layer {
 			display-name = "SYM";
 			bindings = <
@@ -302,8 +277,6 @@
 			sensor-bindings = <&inc_dec_kp LC(Z) LC(Y) &inc_dec_kp LC(LS(TAB)) LC(TAB)>;
 		};
 
-		// -- Layer 6: FUN --
-		// Conditional: active when NAV (1) + NUM (4) held simultaneously
 		fun_layer {
 			display-name = "FUN";
 			bindings = <
