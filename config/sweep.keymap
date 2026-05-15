@@ -133,6 +133,7 @@
 		sel_x: select_x {
 			compatible = "zmk,behavior-hold-tap";
 			#binding-cells = <2>;
+			#binding-cells = <2>;
 			flavor = "tap-preferred";
 			tapping-term-ms = <200>;
 			quick-tap-ms = <150>;
@@ -149,7 +150,7 @@
 			tapping-term-ms = <200>;
 			quick-tap-ms = <150>;
 			require-prior-idle-ms = <125>;
-			global-quick-tap-ms = <150>;
+			global-quick-tap;
 			bindings = <&kp>, <&kp>;
 		};
 
@@ -242,8 +243,6 @@
 		};
 
 		// -- Layer 1: NAV --
-		// Vi-style arrows right hand; clipboard (Win) top-right corner
-		// Encoder L: word-jump (LC(LEFT)/LC(RIGHT)) | Encoder R: page up/down
 		nav_layer {
 			display-name = "NAV";
 			bindings = <
@@ -256,7 +255,6 @@
 		};
 
 		// -- Layer 2: MOUSE -- ORIGINAL PRESERVED VERBATIM --
-		// Encoder: pointer speed (enc_ptr_spd) | scroll speed (enc_scrl_spd)
 		mouse {
 			display-name = "MOUSE";
 			bindings = <
@@ -269,8 +267,6 @@
 		};
 
 		// -- Layer 3: MEDIA --
-		// Media controls right hand; BT/output management bottom-left
-		// Encoder: prev/next track | vol down/up
 		media_layer {
 			display-name = "MED";
 			bindings = <
@@ -283,8 +279,6 @@
 		};
 
 		// -- Layer 4: NUM --
-		// Miryoku numpad right hand; HRM mirrors on home row
-		// Encoder: cursor left/right | page down/up
 		num_layer {
 			display-name = "NUM";
 			bindings = <
@@ -297,8 +291,6 @@
 		};
 
 		// -- Layer 5: SYM --
-		// Miryoku symbols left hand; MOUSE toggle on right-inner thumb
-		// Encoder: undo/redo | prev-tab/next-tab (Windows)
 		sym_layer {
 			display-name = "SYM";
 			bindings = <
@@ -312,8 +304,6 @@
 
 		// -- Layer 6: FUN --
 		// Conditional: active when NAV (1) + NUM (4) held simultaneously
-		// F-keys left hand; system/BT/media right hand
-		// Encoder: vol down/up | brightness down/up
 		fun_layer {
 			display-name = "FUN";
 			bindings = <
